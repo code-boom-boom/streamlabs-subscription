@@ -25,11 +25,13 @@ class DatabaseSeeder extends Seeder
 
         $users->each(function ($user, $index) {
             $this->command->info('======== CREATING DATA FOR USER ' . $index . ' ========');
+
             Follower::factory(rand(300, 500))->create(['user_id' => $user->id]);
             Subscriber::factory(rand(300, 500))->create(['user_id' => $user->id]);
             Donation::factory(rand(300, 500))->create(['user_id' => $user->id]);
             $items = Item::factory(rand(3, 10))->create(['user_id' => $user->id]);
             MerchSale::factory(rand(300, 500))->fromUser($user->id, $items)->create();
+
             $this->command->info('======== FINISHED CREATING DATA FOR USER ' . $index . ' ========');
         });
     }
