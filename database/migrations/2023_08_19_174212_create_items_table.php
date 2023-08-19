@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->default(1);
+            $table->index('user_id');
             $table->string('name')->nullable();
             $table->decimal('price', 8, 2)->default(0);
             $table->timestamps();
